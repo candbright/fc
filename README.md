@@ -1,8 +1,8 @@
-# FUNCTION ROUTER
+# FUNCTION CHAIN
 
 ## 介绍
 
-FUNCTION ROUTER用于定义一系列可同步或异步执行的函数链，不同的函数执行链根据注册时的key值区分，每个函数都有其相应的回滚函数。
+FUNCTION CHAIN用于定义一系列可同步或异步执行的函数链，不同的函数执行链根据注册时的key值区分，每个函数都有其相应的回滚函数。
 
 ## 回滚
 
@@ -22,18 +22,18 @@ A(Arb) - B(Brb) - C(Crb) - D(Drb) - E(Erb)
 
 ## 常用函数
 
-##### RegisterSync(key string, syncFunc func(instance T) error, rollback func(instance T))
+##### Add(function func() error, rollback func())
 
-注册同步函数及其回滚函数到相应的key中
+添加同步函数及其回滚函数
 
-##### RegisterAsync(key string, asyncFunc func(instance T) error, rollback func(instance T))
+##### AddAsync(function func() error, rollback func())
 
-注册异步函数及其回滚函数到相应的key中
+添加异步函数及其回滚函数
 
-##### Sync(key string, instance T) error
+##### Start() error
 
-执行key值对应的同步函数链，当某个函数执行产生error，则中断执行，并返回error
+异步函数链和同步函数链同时执行
 
-##### Async(key string, instance T)
+##### Run() error
 
-执行key值对应的异步函数链
+先执行异步函数链，执行完后执行同步函数链

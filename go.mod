@@ -1,3 +1,3 @@
-module github.com/candbright/frouter
+module github.com/candbright/fc
 
 go 1.20
